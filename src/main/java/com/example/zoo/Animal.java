@@ -18,6 +18,13 @@ public class Animal {
         this.isMammal = isMammal;
     }
 
+    public Animal() {
+        this.family = "Unknown";
+        this.name = "Unknown";
+        this.age = 0;
+        this.isMammal = false;
+    }
+
 
     public String toString() {
         return "Animal { family=" + family + ", name=" + name +

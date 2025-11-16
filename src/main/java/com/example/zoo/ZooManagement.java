@@ -17,5 +17,20 @@ int index= myZoo.searchAnimal(lion);
 System.out.println(index);
         System.out.println(myZoo);
         System.out.println(lion);
+
+        Aquatic aquatic = new Aquatic();
+        Dolphin dolphin = new Dolphin();
+        Penguin penguin = new Penguin();
+        Terrestrial terrestrial = new Terrestrial();
+
+        System.out.println(aquatic);
+        System.out.println(dolphin);
+        System.out.println(penguin);
+        System.out.println(terrestrial);
+
+        // Appel de la méthode swim (Instruction 24)
+        aquatic.swim();
+        dolphin.swim();
+        penguin.swim();
     }
 }
