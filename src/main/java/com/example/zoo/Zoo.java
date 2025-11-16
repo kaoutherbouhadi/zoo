@@ -8,12 +8,19 @@ public class Zoo {
     private int animalCount = 0;
 
 
-    public Zoo(String name, String city) {
-        this.name = name;
-        this.city = city;
+    public Zoo(String name, String city, int nbrCages) {
 
-        this.animals = new Animal[25];
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("Le nom du zoo ne peut pas être vide !");
+            this.name = "ZooSansNom";
+        } else {
+            this.name = name;
+        }
+
+        this.city = city;
+        this.animals = new Animal[nbrCages];
     }
+
 
 
     public void displayZoo() {
@@ -26,15 +33,20 @@ public class Zoo {
         System.out.println("nom de l'animal:"+ animals[i]);}
     }
     boolean addAnimal(Animal animal){
-if(animals.length> animalCount)
+        if (isZooFull())
+        {
+            System.out.println("le zoo est plein");
+            return false;
+        }
+if(searchAnimal(animal)==-1)
 {
-    this.animals[animalCount]=animal;
-    animalCount++;
-        return true;
+  System.out.println("l'animaux existe deja");
+  return false;
 }
 
-
-return false;
+animals[animalCount]=animal;
+animalCount++;
+return true;
     }
     public boolean addAnimalUnique(Animal animal) {
         if (searchAnimal(animal) != -1) {
