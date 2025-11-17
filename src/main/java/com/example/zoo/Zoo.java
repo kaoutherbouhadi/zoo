@@ -1,11 +1,17 @@
 package com.example.zoo;
 
+import java.lang.reflect.Array;
+
 public class Zoo {
     Animal[] animals;
     String name;
     String city;
+   Aquatic[] aquaticAnimals = new Aquatic[10];
     private final int nbrCages=25;
     private int animalCount = 0;
+    int aquaticCount = 0;
+    int nbDolphin = 0;
+    int nbPenguin = 0;
 
 
     public Zoo(String name, String city, int nbrCages) {
@@ -48,6 +54,7 @@ animals[animalCount]=animal;
 animalCount++;
 return true;
     }
+
     public boolean addAnimalUnique(Animal animal) {
         if (searchAnimal(animal) != -1) {
             return false;
@@ -83,6 +90,46 @@ return true;
     Zoo comparerZoo(Zoo z1, Zoo z2){
             if(z1.animalCount<z2.animalCount) return z1;
             else return z2;
+    }
+    public void addAquaticAnimal(Aquatic aquatic){
+        if(aquaticCount<aquaticAnimals.length)
+        {
+            aquaticAnimals[aquaticCount]=aquatic;
+            aquaticCount++;
+        }
+        else {
+            System.out.println("tableau est plein");
+        }
+    }
+    public void displaySwim() {
+        for (int i = 0; i < aquaticCount; i++) {
+            aquaticAnimals[i].swim();
+            System.out.println("This aquatic animal is swimming.");
+        }
+    }
+    public float maxPenguinSwimmingDepth(){
+        float max = 0;
+for (int i=0; i< aquaticCount; i++)
+{
+    if(aquaticAnimals[i] instanceof Penguin){
+        float depth = ((Penguin) aquaticAnimals[i]).getSwimmingDepth();
+    if (depth > max) max = depth;}}
+        return max;
+    }
+    public void displayNumberOfAquaticsByType(){
+
+        for (int i=0; i<aquaticCount; i++)
+        {
+            if(aquaticAnimals[i] instanceof Dolphin){
+                nbDolphin ++;
+            }
+            else {
+                nbPenguin ++;
+            }
+        }
+
+        System.out.println("Number of Dolphins: " + nbDolphin);
+        System.out.println("Number of Penguins: " + nbPenguin);
     }
     public String toString() {
         return "Zoo { name=" + name + ", city=" + city + ", nbrCages=" + nbrCages + " }";

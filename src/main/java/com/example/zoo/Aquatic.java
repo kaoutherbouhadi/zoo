@@ -18,8 +18,21 @@ class Aquatic extends Animal {
         return super.toString() + ", habitat=" + habitat;
     }
 
-    // Instruction 24
+
     public void swim() {
         System.out.println("This aquatic animal is swimming.");
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+
+        if (!(obj instanceof Aquatic)) return false;
+
+        Aquatic other = (Aquatic) obj;
+        return this.name.equals(other.name) &&
+                this.age == other.age &&
+                this.habitat.equals(other.habitat);
+
+    }
+
 }
