@@ -1,6 +1,6 @@
 package com.example.zoo;
 
-class Aquatic extends Animal {
+class Aquatic extends Animal implements  Carnivore<Food>{
     protected String habitat;
 
     public Aquatic() {
@@ -11,6 +11,9 @@ class Aquatic extends Animal {
     public Aquatic(String family, String name, int age, boolean isMammal, String habitat) {
         super(family, name, age, isMammal);
         this.habitat = (habitat == null || habitat.isEmpty()) ? "Unknown" : habitat;
+    }
+
+    public Aquatic(String fish, String requin, int i, boolean b, String ocean, int i1) {
     }
 
     @Override
@@ -35,4 +38,20 @@ class Aquatic extends Animal {
 
     }
 
-}
+    public String getHabitat() {
+        return habitat;
+    }
+
+    public void setHabitat(String habitat) {
+        this.habitat = habitat;
+    }
+
+    public void  eatMeat(Food food){
+        if(food== Food.MEAT)
+        {
+            System.out.println(this.getName()+ "eat meat");
+        }
+        else {
+            System.out.println("ne peut pas manger des plantes");
+        }
+    }}

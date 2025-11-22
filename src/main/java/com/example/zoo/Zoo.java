@@ -7,7 +7,7 @@ public class Zoo {
     String name;
     String city;
    Aquatic[] aquaticAnimals = new Aquatic[10];
-    private final int nbrCages=25;
+    private final int nbrCages=3;
     private int animalCount = 0;
     int aquaticCount = 0;
     int nbDolphin = 0;
@@ -27,40 +27,111 @@ public class Zoo {
         this.animals = new Animal[nbrCages];
     }
 
+    public Animal[] getAnimals() {
+        return animals;
+    }
 
+    public void setAnimals(Animal[] animals) {
+        this.animals = animals;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Aquatic[] getAquaticAnimals() {
+        return aquaticAnimals;
+    }
+
+    public void setAquaticAnimals(Aquatic[] aquaticAnimals) {
+        this.aquaticAnimals = aquaticAnimals;
+    }
+
+    public int getNbrCages() {
+        return nbrCages;
+    }
+
+    public int getAnimalCount() {
+        return animalCount;
+    }
+
+    public void setAnimalCount(int animalCount) {
+        this.animalCount = animalCount;
+    }
+
+    public int getAquaticCount() {
+        return aquaticCount;
+    }
+
+    public void setAquaticCount(int aquaticCount) {
+        this.aquaticCount = aquaticCount;
+    }
+
+    public int getNbDolphin() {
+        return nbDolphin;
+    }
+
+    public void setNbDolphin(int nbDolphin) {
+        this.nbDolphin = nbDolphin;
+    }
+
+    public int getNbPenguin() {
+        return nbPenguin;
+    }
+
+    public void setNbPenguin(int nbPenguin) {
+        this.nbPenguin = nbPenguin;
+    }
 
     public void displayZoo() {
         System.out.println("Zoo name : " + name);
         System.out.println("City : " + city);
-        System.out.println("Number of cages : " + nbrCages);
+        System.out.println("nb de cages : " + nbrCages);
     }
     public void displayAnimal(){
         for (int i=0; i <animalCount;i++){
         System.out.println("nom de l'animal:"+ animals[i]);}
     }
-    boolean addAnimal(Animal animal){
-        if (isZooFull())
-        {
-            System.out.println("le zoo est plein");
-            return false;
-        }
-if(searchAnimal(animal)==-1)
-{
-  System.out.println("l'animaux existe deja");
-  return false;
-}
+    public void addAnimal(Animal animal) throws ZooFullException, InvalidAgeException {
 
-animals[animalCount]=animal;
-animalCount++;
-return true;
+
+        if (animal.getAge() < 0) {
+            throw new InvalidAgeException("age négatif : " + animal.getName());
+        }
+
+        if (animalCount >= nbrCages) {
+            throw new ZooFullException("zoo plein  : " + animal.getName());
+        }
+
+        if (searchAnimal(animal) != -1) {
+            System.out.println("l'animal existe deja : " + animal.getName());
+            return;
+        }
+
+        animals[animalCount] = animal;
+        animalCount++;
+        System.out.println(animal.getName() + " ajout avec succes");
     }
 
-    public boolean addAnimalUnique(Animal animal) {
+
+   /* public boolean addAnimalUnique(Animal animal) {
         if (searchAnimal(animal) != -1) {
             return false;
         }
         return addAnimal(animal);
-    }
+    }*/
     boolean removeAnimal(Animal animal){
         int index=searchAnimal(animal);
         if (index==-1) return false;
@@ -104,7 +175,7 @@ return true;
     public void displaySwim() {
         for (int i = 0; i < aquaticCount; i++) {
             aquaticAnimals[i].swim();
-            System.out.println("This aquatic animal is swimming.");
+            System.out.println("this aquatic animal is swimming.");
         }
     }
     public float maxPenguinSwimmingDepth(){
@@ -128,8 +199,8 @@ for (int i=0; i< aquaticCount; i++)
             }
         }
 
-        System.out.println("Number of Dolphins: " + nbDolphin);
-        System.out.println("Number of Penguins: " + nbPenguin);
+        System.out.println("nombre de dolphins: " + nbDolphin);
+        System.out.println("nombre de penguins: " + nbPenguin);
     }
     public String toString() {
         return "Zoo { name=" + name + ", city=" + city + ", nbrCages=" + nbrCages + " }";
